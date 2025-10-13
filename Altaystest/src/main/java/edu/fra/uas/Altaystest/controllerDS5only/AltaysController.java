@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AltaysController {
 
-    @RequestMapping(value = "hello", method=RequestMethod.GET)
+    @RequestMapping(value = "Altaystest", method=RequestMethod.GET)
     @ResponseBody
     public String getHelloWorld() {
         return "<h1> Hello World from AltaysTestApplication </h1>";
-        
+
     }
 
 }
