@@ -1,4 +1,4 @@
-package edu.fra.uas.Sino;
+package edu.fra.uas.sino;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
