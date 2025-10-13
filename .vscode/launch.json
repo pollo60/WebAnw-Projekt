@@ -9,6 +9,16 @@
             "projectName": "Altaystest",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-HelloApplication<hello>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.fra.uas.HelloApplication",
+            "projectName": "hello",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
