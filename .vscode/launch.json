@@ -29,6 +29,16 @@
             "projectName": "marcel",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-JassineApplication<Jassine>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.fra.uas.Jassine.JassineApplication",
+            "projectName": "Jassine",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

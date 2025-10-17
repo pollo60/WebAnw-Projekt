@@ -1,0 +1,14 @@
+package edu.fra.uas.Jassine.controller;
+import org.springframework.stererotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HelloWorldController {
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @ResponseBody
+    public String sayHello() {
+        return "<h1>Hello World Spring Boot!</h1>";
+    }
+}
