@@ -4,7 +4,7 @@ package edu.fra.uas.Altaystest.controllerDS5only; // Paketdeklaration: organisie
  *  | Spring Framework Annotationen und Web-MVC Typen:                     |
  *  |                                                                      |
  *  | Web‑MVC‑Typen sind die Komponenten des                               |
- *  | Model‑View‑Controller‑Musterns (z. B. Dispatcher/Router,             |
+ *  | Model‑View‑Controller‑Musters (z. B. Dispatcher/Router,              |
  *  | Controller, Model, View, HandlerMapping, ViewResolver), die zusammen |
  *  | HTTP‑Anfragen routen, Daten bereitstellen und Antworten rendern.     | 
  *  |______________________________________________________________________| */ 
