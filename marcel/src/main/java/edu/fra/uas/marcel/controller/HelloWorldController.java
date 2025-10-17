@@ -21,7 +21,7 @@ public class HelloWorldController { // öffentliche Klasse, die HTTP-Endpunkte (
     // RequestMapping verbindet Pfad + HTTP-Methode mit der folgenden Handler-Methode
     // value = "/altaystest": der URL-Pfad (relativ zur Root-URL der Anwendung)
     // method = RequestMethod.GET: nur GET-Anfragen werden von dieser Methode verarbeitet
-    @RequestMapping(value = "/altaystest", method = RequestMethod.GET) //Im Browser: http://localhost:8080/altaystest oder http://127.0.0.1:8080/altaystest
+    @RequestMapping(value = "/marcel", method = RequestMethod.GET) //Im Browser: http://localhost:8080/altaystest oder http://127.0.0.1:8080/altaystest
 
     /** @ResponseBody
      * Liefert einen Begrüßungstext für die Testseite.
@@ -32,7 +32,7 @@ public class HelloWorldController { // öffentliche Klasse, die HTTP-Endpunkte (
     public String getHelloWorld() { 
         // Rückgabe eines einfachen HTML-Strings. Hinweis: Roh-HTML hier ist für Tests ok, in Produktionscode sollte man Templates/Thymeleaf o.ä. oder JSON verwenden
         // Sicherheitsaspekt: wenn Inhalte aus Benutzereingaben zusammengebaut werden, sind Escaping und XSS-Schutz notwendig.
-        return "<h1> Hello World from AltaysTestApplication </h1>"; // Literal-String: direkt in die HTTP-Antwort geschrieben
+        return "<h1> Hello World from Marcel! </h1>"; // Literal-String: direkt in die HTTP-Antwort geschrieben
 
     } // Ende der Methode getHelloWorld
 

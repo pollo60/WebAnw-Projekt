@@ -19,6 +19,16 @@
             "projectName": "hello",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-MarcelApplication<marcel>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.fra.uas.marcel.MarcelApplication",
+            "projectName": "marcel",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
