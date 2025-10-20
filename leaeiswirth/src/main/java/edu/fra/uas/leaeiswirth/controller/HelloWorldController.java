@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloWorldController {
 
-    @RequestMapping(value="path", method=RequestMethod.GET)
+    @RequestMapping(value="leaeiswirth", method=RequestMethod.GET)
     @ResponseBody
     public String getHelloWorld(){
         return "<h1>Hello World Spring Boot! </h1>";
