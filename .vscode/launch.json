@@ -39,6 +39,16 @@
             "projectName": "Jassine",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LeaeiswirthApplication<leaeiswirth>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "edu.fra.uas.leaeiswirth.LeaeiswirthApplication",
+            "projectName": "leaeiswirth",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
