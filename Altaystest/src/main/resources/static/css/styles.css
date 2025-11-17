@@ -1,0 +1,160 @@
+/* ╔════════════════════════════════════════════════════════════════════════╗
+   ║  DATEI: styles.css                                                     ║
+   ║  ZWECK: Styling (Aussehen) der Webseite                               ║
+   ║                                                                        ║
+   ║  WARUM BRAUCHST DU DIESE DATEI?                                        ║
+   ║  CSS (Cascading Style Sheets) steuert das Design: Farben, Abstände,   ║
+   ║  Schriften, Layout. Ohne CSS wäre die Webseite nur schwarzer Text     ║
+   ║  auf weißem Hintergrund.                                               ║
+   ║                                                                        ║
+   ║  WIE IST SIE MIT HTML VERBUNDEN?                                       ║
+   ║  In index.html steht: <link rel="stylesheet" href="/css/styles.css">  ║
+   ║  Das lädt diese Datei und wendet die Regeln auf das HTML an.          ║
+   ╚════════════════════════════════════════════════════════════════════════╝ */
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 1: CSS-Variablen (Zentrale Farben)
+   ════════════════════════════════════════════════════════════════════════
+   
+   Definiere Farben als CSS-Variablen im :root-Selektor.
+   
+   Schreibe:
+   :root {
+     --bg: [Farbe für Hintergrund, z.B. #f6f8fb];
+     --card: [Farbe für Karten, z.B. #ffffff];
+     --accent: [Farbe für Buttons, z.B. #2b6cb0];
+     --muted: [Farbe für gedämpften Text, z.B. #6b7280];
+   }
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 2: Box-Sizing für alle Elemente
+   ════════════════════════════════════════════════════════════════════════
+   
+   Setze box-sizing: border-box für alle Elemente (*-Selektor).
+   Das verhindert Layout-Probleme mit Padding und Border.
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 3: Body-Styling
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style den body mit:
+   - font-family: Arial, sans-serif (oder eine andere Schrift)
+   - margin: 0 (kein Außenrand)
+   - background: var(--bg) (nutze deine Variable)
+   - color: #0f172a (dunkle Textfarbe)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 4: Container (zentrierter Bereich mit Karte)
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style .container mit:
+   - max-width: 760px (maximale Breite)
+   - margin: 48px auto (zentriert horizontal)
+   - padding: 24px (Innenabstand)
+   - background: white (weißer Hintergrund)
+   - border-radius: 10px (abgerundete Ecken)
+   - box-shadow: 0 4px 12px rgba(0,0,0,0.1) (Schatten für 3D-Effekt)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 5: Überschrift h1
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style h1 mit:
+   - margin: 0 0 8px 0 (nur unten Abstand)
+   - font-size: 1.6rem (große Schrift)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 6: Input-Feld
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style input[type='text'] mit:
+   - padding: 12px 14px (Innenabstand)
+   - border-radius: 8px (abgerundete Ecken)
+   - border: 1px solid #e6edf3 (dünner grauer Rahmen)
+   - background: var(--card) (nutze deine Variable)
+   - font-size: 1rem (normale Schriftgröße)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 7: Button
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style button mit:
+   - cursor: pointer (Hand-Cursor)
+   - border: 0 (kein Rahmen)
+   - padding: 10px 16px (Innenabstand)
+   - border-radius: 8px (abgerundete Ecken)
+   - background: var(--accent) (nutze deine Variable)
+   - color: white (weiße Schrift)
+   - font-weight: 600 (fett)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 8: Ergebnis-Bereich
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style .result mit:
+   - margin-top: 18px (Abstand nach oben)
+   - padding: 16px (Innenabstand)
+   - border-radius: 8px (abgerundete Ecken)
+   - background: #fbfdff (sehr heller Blauton)
+   - border: 1px solid #eef2f7 (dünner Rahmen)
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 9: Hidden-Klasse
+   ════════════════════════════════════════════════════════════════════════
+   
+   Style .hidden mit:
+   - display: none (Element unsichtbar machen)
+   
+   Diese Klasse wird per JavaScript entfernt, um das Ergebnis anzuzeigen.
+*/
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   FERTIG! BONUS-AUFGABEN (optional):
+   ════════════════════════════════════════════════════════════════════════
+   
+   1. Style .lead (Beschreibungstext unter h1):
+      - color: var(--muted)
+      - margin: 0 0 16px 0
+   
+   2. Style button.secondary (Zurücksetzen-Button):
+      - background: transparent
+      - border: 1px solid #cfd8e3
+      - color: var(--muted)
+   
+   3. Style .row (Zeilen im Formular):
+      - display: flex
+      - flex-direction: column
+      - margin-bottom: 12px
+   
+   4. Responsive Design (für kleine Bildschirme):
+      @media (max-width: 520px) {
+        .container { margin: 18px; padding: 16px; }
+        button { width: 100%; }
+      }
+*/

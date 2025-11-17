@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Notendurchschnitt Rechner — Altaystest</title>
+    <!-- 
+      ╔════════════════════════════════════════════════════════════════════════╗
+      ║  WARUM DIESE ZEILE?                                                    ║
+      ║  Link zum CSS-Stylesheet (styles.css im Ordner "css").                ║
+      ║  CSS steuert das Aussehen (Farben, Abstände, Schriften).              ║
+      ╚════════════════════════════════════════════════════════════════════════╝
+    -->
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- 
+      ╔════════════════════════════════════════════════════════════════════════╗
+      ║  DATEI: index.html                                                     ║
+      ║  ZWECK: Benutzeroberfläche (Frontend) für den Notenrechner            ║
+      ║                                                                        ║
+      ║  WARUM BRAUCHST DU DIESE DATEI?                                        ║
+      ║  HTML definiert die Struktur der Webseite (Überschriften, Eingabe-    ║
+      ║  felder, Buttons). Der Browser zeigt diese Struktur an.               ║
+      ║                                                                        ║
+      ║  WIE IST SIE MIT DEM JAVA-CODE VERBUNDEN?                              ║
+      ║  Das JavaScript am Ende dieser Datei sendet eine HTTP-Anfrage an      ║
+      ║  den Controller (/calculate-average). Der Controller antwortet mit    ║
+      ║  JSON, das JavaScript zeigt das Ergebnis auf der Seite an.            ║
+      ╚════════════════════════════════════════════════════════════════════════╝
+    -->
+
+    <main class="container">
+      <h1>Notendurchschnitt Rechner</h1>
+
+      <p class="lead">
+        Gib deine Noten ein (getrennt durch Komma), z. B.: 
+        <code>1.0, 2.3, 1.7</code>
+      </p>
+
+      <!-- 
+        ═══════════════════════════════════════════════════════════════════
+        FORMULAR: Hier gibt der Benutzer die Noten ein
+        ═══════════════════════════════════════════════════════════════════
+      -->
+      <form id="gradesForm" action="#" onsubmit="return false;">
+        <div class="row">
+          <label for="gradesInput">Noten (Komma-separiert)</label>
+          <input id="gradesInput" type="text" placeholder="1.0, 2.3, 3.7" />
+        </div>
+
+        <div class="row actions">
+          <button id="calcBtn" type="button">Durchschnitt berechnen</button>
+          <button id="clearBtn" type="button" class="secondary">Zurücksetzen</button>
+        </div>
+      </form>
+
+      <!-- 
+        ═══════════════════════════════════════════════════════════════════
+        ERGEBNIS-BEREICH: Hier wird das Ergebnis angezeigt
+        (anfangs versteckt mit class="hidden")
+        ═══════════════════════════════════════════════════════════════════
+      -->
+      <section id="result" class="result hidden" aria-live="polite">
+        <h2>Ergebnis</h2>
+        <p id="avgText"></p>
+        <p id="gradeText"></p>
+        <p id="countText"></p>
+      </section>
+
+      <section class="notes">
+        <h3>Hinweise</h3>
+        <ul>
+          <li>Leerzeichen werden ignoriert. Ungültige Einträge werden übersprungen.</li>
+          <li>Dezimaltrenner: Punkt (.) oder Komma (,) werden akzeptiert.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- 
+      ╔════════════════════════════════════════════════════════════════════════╗
+      ║  JAVASCRIPT: Die "Intelligenz" der Webseite                            ║
+      ║                                                                        ║
+      ║  AUFGABE VON JAVASCRIPT:                                               ║
+      ║  1. Warte auf Klick auf den Button "Durchschnitt berechnen"           ║
+      ║  2. Hole die eingegebenen Noten aus dem Input-Feld                    ║
+      ║  3. Sende sie per HTTP-POST an den Server (/calculate-average)        ║
+      ║  4. Empfange die Antwort (JSON mit Durchschnitt, Anzahl, Einschätzung)║
+      ║  5. Zeige das Ergebnis auf der Seite an                               ║
+      ╚════════════════════════════════════════════════════════════════════════╝
+    -->
+    <script>
+      // ════════════════════════════════════════════════════════════════════
+      //  HILFSFUNKTION: parseGrades (schon implementiert)
+      // ════════════════════════════════════════════════════════════════════
+      /**
+       * Wandelt eine Komma-separierte Zeichenkette in ein Array von Zahlen um.
+       * Beispiel: "1.0, 2.3, 1,7" → [1.0, 2.3, 1.7]
+       */
+      function parseGrades(input) {
+        if (!input) return [];
+        return input.split(',')                    // Teile bei jedem Komma
+          .map(s => s.trim())                      // Entferne Leerzeichen
+          .filter(s => s.length > 0)               // Ignoriere leere Strings
+          .map(s => s.replace(',', '.'))           // Ersetze Komma durch Punkt
+          .map(Number)                              // Wandle in Zahlen um
+          .filter(n => Number.isFinite(n));        // Nur gültige Zahlen
+      }
+
+      // ════════════════════════════════════════════════════════════════════
+      //  DOM-ELEMENTE: Zugriff auf HTML-Elemente
+      // ════════════════════════════════════════════════════════════════════
+      const gradesInput = document.getElementById('gradesInput');
+      const calcBtn = document.getElementById('calcBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const resultSection = document.getElementById('result');
+      const avgText = document.getElementById('avgText');
+      const gradeText = document.getElementById('gradeText');
+      const countText = document.getElementById('countText');
+
+      // ════════════════════════════════════════════════════════════════════
+      //  EVENT-LISTENER: Was passiert bei Klick auf "Durchschnitt berechnen"?
+      // ════════════════════════════════════════════════════════════════════
+
+      // ┌────────────────────────────────────────────────────────────────────┐
+      // │ AUFGABE 1: Füge einen Click-Listener zum Button hinzu              │
+      // │                                                                    │
+      // │ SCHRITTE:                                                          │
+      // │ 1. Schreibe: calcBtn.addEventListener('click', async () => {       │
+      // │ 2. Hole den Wert aus dem Input-Feld: gradesInput.value            │
+      // │ 3. Parse die Noten mit: const grades = parseGrades(raw);          │
+      // │ 4. Prüfe, ob grades.length === 0 (keine Noten)                    │
+      // │    → Wenn ja, zeige Fehlermeldung und return                      │
+      // │                                                                    │
+      // │ BEISPIEL (Anfang):                                                 │
+      // │ calcBtn.addEventListener('click', async () => {                    │
+      // │   const raw = gradesInput.value;                                  │
+      // │   const grades = parseGrades(raw);                                │
+      // │   if (grades.length === 0) {                                      │
+      // │     avgText.textContent = 'Keine Noten gefunden';                 │
+      // │     gradeText.textContent = '';                                   │
+      // │     countText.textContent = '';                                   │
+      // │     resultSection.classList.remove('hidden');                     │
+      // │     return;                                                        │
+      // │   }                                                                │
+      // └────────────────────────────────────────────────────────────────────┘
+
+      // SCHREIBE HIER DEN CLICK-LISTENER (Zeile ca. 149):
+
+
+        // ┌────────────────────────────────────────────────────────────────┐
+        // │ AUFGABE 2: Sende die Noten per fetch() an den Server           │
+        // │                                                                │
+        // │ WARUM fetch()?                                                 │
+        // │ fetch() ist die moderne Methode, um HTTP-Anfragen zu senden.  │
+        // │ Wir senden die Noten als JSON an /calculate-average.          │
+        // │                                                                │
+        // │ SCHRITTE:                                                      │
+        // │ 1. Schreibe try { ... } catch (error) { ... }                 │
+        // │ 2. Im try-Block: const response = await fetch(...)            │
+        // │ 3. URL: '/calculate-average'                                  │
+        // │ 4. Methode: POST                                              │
+        // │ 5. Headers: { 'Content-Type': 'application/json' }            │
+        // │ 6. Body: JSON.stringify({ grades: grades })                   │
+        // │                                                                │
+        // │ BEISPIEL:                                                      │
+        // │ try {                                                          │
+        // │   const response = await fetch('/calculate-average', {        │
+        // │     method: 'POST',                                            │
+        // │     headers: { 'Content-Type': 'application/json' },          │
+        // │     body: JSON.stringify({ grades: grades })                  │
+        // │   });                                                          │
+        // └────────────────────────────────────────────────────────────────┘
+
+        // SCHREIBE HIER DEN FETCH-AUFRUF (Zeile ca. 180):
+
+
+          // ┌──────────────────────────────────────────────────────────────┐
+          // │ AUFGABE 3: Prüfe, ob die Antwort erfolgreich war             │
+          // │                                                              │
+          // │ HINWEIS:                                                     │
+          // │ response.ok ist true, wenn der Server Statuscode 200 schickt│
+          // │                                                              │
+          // │ BEISPIEL:                                                    │
+          // │ if (!response.ok) {                                          │
+          // │   throw new Error('Server-Fehler: ' + response.status);     │
+          // │ }                                                            │
+          // └──────────────────────────────────────────────────────────────┘
+
+          // SCHREIBE HIER DIE FEHLERPRÜFUNG (Zeile ca. 199):
+
+
+          // ┌──────────────────────────────────────────────────────────────┐
+          // │ AUFGABE 4: Parse die JSON-Antwort                            │
+          // │                                                              │
+          // │ HINWEIS:                                                     │
+          // │ Die Antwort ist JSON: { average, count, interpretation }    │
+          // │ Mit .json() wandeln wir sie in ein JavaScript-Objekt um.    │
+          // │                                                              │
+          // │ BEISPIEL:                                                    │
+          // │ const result = await response.json();                       │
+          // └──────────────────────────────────────────────────────────────┘
+
+          // SCHREIBE HIER DAS JSON-PARSING (Zeile ca. 214):
+
+
+          // ┌──────────────────────────────────────────────────────────────┐
+          // │ AUFGABE 5: Zeige das Ergebnis auf der Seite an               │
+          // │                                                              │
+          // │ SCHRITTE:                                                    │
+          // │ 1. Setze avgText.textContent auf "Durchschnitt: X.XX"       │
+          // │ 2. Setze gradeText.textContent auf "Einschätzung: ..."      │
+          // │ 3. Setze countText.textContent auf "Anzahl: X"              │
+          // │ 4. Mache den Ergebnis-Bereich sichtbar                      │
+          // │                                                              │
+          // │ BEISPIEL:                                                    │
+          // │ avgText.textContent =                                        │
+          // │   `Durchschnitt: ${result.average.toFixed(2)}`;             │
+          // │ gradeText.textContent =                                      │
+          // │   `Einschätzung: ${result.interpretation}`;                 │
+          // │ countText.textContent =                                      │
+          // │   `Anzahl berücksichtigter Noten: ${result.count}`;         │
+          // │ resultSection.classList.remove('hidden');                   │
+          // └──────────────────────────────────────────────────────────────┘
+
+          // SCHREIBE HIER DIE ANZEIGE (Zeile ca. 238):
+
+
+        // ┌────────────────────────────────────────────────────────────────┐
+        // │ AUFGABE 6: Behandle Fehler im catch-Block                      │
+        // │                                                                │
+        // │ BEISPIEL:                                                      │
+        // │ } catch (error) {                                              │
+        // │   avgText.textContent = 'Fehler: ' + error.message;           │
+        // │   gradeText.textContent = '';                                  │
+        // │   countText.textContent = '';                                  │
+        // │   resultSection.classList.remove('hidden');                    │
+        // │ }                                                               │
+        // └────────────────────────────────────────────────────────────────┘
+
+        // SCHREIBE HIER DEN CATCH-BLOCK (Zeile ca. 255):
+
+
+      // }); // Ende des Click-Listeners (schließende Klammer)
+
+
+      // ════════════════════════════════════════════════════════════════════
+      //  BONUS: Zurücksetzen-Button (schon implementiert)
+      // ════════════════════════════════════════════════════════════════════
+      clearBtn.addEventListener('click', () => {
+        gradesInput.value = '';
+        resultSection.classList.add('hidden');
+      });
+
+      // ════════════════════════════════════════════════════════════════════
+      //  BONUS: Enter-Taste im Input-Feld (schon implementiert)
+      // ════════════════════════════════════════════════════════════════════
+      gradesInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          calcBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>
