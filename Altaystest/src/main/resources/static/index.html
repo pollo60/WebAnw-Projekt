@@ -75,6 +75,26 @@
           <li>Dezimaltrenner: Punkt (.) oder Komma (,) werden akzeptiert.</li>
         </ul>
       </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════════════
+           AUFGABE 7a: QUIZ-BONUS-SECTION (HTML-STRUKTUR)
+           ═══════════════════════════════════════════════════════════════════ -->
+      <!-- 
+         📘 Füge hier die Quiz-Section ein (siehe Aufgabe 7 im <script>-Bereich)
+         
+         Struktur (Vorlage):
+         <section class="quiz-section">
+           <h2>📝 Quiz-Bonus Berechnung</h2>
+           <p class="lead">...</p>
+           <form id="quizForm">...</form>
+           <div id="quizResult" class="result hidden">...</div>
+         </section>
+      -->
+
+      <!-- SCHREIBE HIER DEINE QUIZ-HTML-SECTION: -->
+
+
     </main>
 
     <!-- 
@@ -261,6 +281,157 @@
           calcBtn.click();
         }
       });
+
+
+      // ════════════════════════════════════════════════════════════════════
+      //  AUFGABE 7: QUIZ-BONUS-BERECHNUNG IMPLEMENTIEREN
+      // ════════════════════════════════════════════════════════════════════
+
+      // ┌────────────────────────────────────────────────────────────────────┐
+      // │ AUFGABE 7: FRONTEND FÜR QUIZ-BONUS-BERECHNUNG                      │
+      // │                                                                    │
+      // │ 📘 KONTEXT (Übung 1: Web Basics - Client-Server-Kommunikation)    │
+      // │ Du implementierst eine zweite, parallele Funktion für Quiz-Bonus. │
+      // │                                                                    │
+      // │ ANFORDERUNGEN:                                                     │
+      // │ 1. Erstelle HTML-Section (siehe Aufgabe 7a oben im HTML)          │
+      // │ 2. Implementiere JavaScript-Logik analog zu calculateAverage()    │
+      // │ 3. Sende Daten an Endpunkt: /calculate-quiz-bonus                 │
+      // │ 4. Zeige Ergebnis mit Bonuspunkten an                             │
+      // └────────────────────────────────────────────────────────────────────┘
+
+      // ┌────────────────────────────────────────────────────────────────────┐
+      // │ SCHRITT 1: HTML-STRUKTUR (scrolle hoch zu Zeile 95)                │
+      // │                                                                    │
+      // │ Füge nach <section class="notes"> diese HTML-Section ein:         │
+      // │                                                                    │
+      // │ VORLAGE (kopiere dies ins HTML, entferne die Kommentarzeichen):   │
+      // └────────────────────────────────────────────────────────────────────┘
+      /*
+      
+      <section class="quiz-section">
+        <h2>📝 Quiz-Bonus Berechnung</h2>
+        <p class="lead">
+          Gib deine wöchentlichen Quiz-Ergebnisse ein (9 Werte in Prozent).
+          Beispiel: <code>85, 90, 78, 88, 92, 75, 80, 87.5, 83</code>
+        </p>
+        
+        <form id="quizForm" action="#" onsubmit="return false;">
+          <div class="row">
+            <label for="quizInput">Quiz-Prozentsätze (9 Werte)</label>
+            <input id="quizInput" type="text" 
+                   placeholder="85, 90, 78, 88, 92, 75, 80, 87.5, 83" />
+          </div>
+          <div class="row actions">
+            <button id="quizCalcBtn" type="button">Bonus berechnen</button>
+            <button id="quizClearBtn" type="button" class="secondary">Zurücksetzen</button>
+          </div>
+        </form>
+        
+        <div id="quizResult" class="result hidden">
+          <h3>Dein Quiz-Bonus:</h3>
+          <p class="result-value" id="quizAverage"></p>
+          <p class="result-bonus" id="quizBonus"></p>
+          <p class="result-interpretation" id="quizInterpretation"></p>
+        </div>
+      </section>
+      
+      */
+
+      // ┌────────────────────────────────────────────────────────────────────┐
+      // │ SCHRITT 2: JAVASCRIPT-LOGIK (schreibe hier drunter)                │
+      // │                                                                    │
+      // │ a) DOM-Elemente holen:                                             │
+      // │    const quizInput = document.getElementById('quizInput');         │
+      // │    const quizCalcBtn = document.getElementById('quizCalcBtn');     │
+      // │    const quizClearBtn = document.getElementById('quizClearBtn');   │
+      // │    const quizResultSection = document.getElementById('quizResult');│
+      // │    const quizAverage = document.getElementById('quizAverage');     │
+      // │    const quizBonus = document.getElementById('quizBonus');         │
+      // │    const quizInterpretation =                                      │
+      // │          document.getElementById('quizInterpretation');            │
+      // │                                                                    │
+      // │ b) Event Listener für "Bonus berechnen"-Button:                    │
+      // │    quizCalcBtn.addEventListener('click', async () => {             │
+      // │      // 1. Input-Wert holen                                        │
+      // │      const input = quizInput.value.trim();                         │
+      // │                                                                    │
+      // │      // 2. Validierung: leer?                                      │
+      // │      if (input === '') {                                           │
+      // │        alert('Bitte gib deine Quiz-Ergebnisse ein!');              │
+      // │        return;                                                     │
+      // │      }                                                             │
+      // │                                                                    │
+      // │      // 3. String zu Array konvertieren                            │
+      // │      const percentages = input.split(',')                          │
+      // │                               .map(str => parseFloat(str.trim()));  │
+      // │                                                                    │
+      // │      // 4. Validierung: ungültige Werte?                           │
+      // │      if (percentages.some(isNaN)) {                                │
+      // │        alert('Ungültige Eingabe! Nutze nur Zahlen.');              │
+      // │        return;                                                     │
+      // │      }                                                             │
+      // │                                                                    │
+      // │      // 5. Validierung: genau 9 Werte?                             │
+      // │      if (percentages.length !== 9) {                               │
+      // │        alert('Bitte gib genau 9 Quiz-Werte ein!');                 │
+      // │        return;                                                     │
+      // │      }                                                             │
+      // │                                                                    │
+      // │      // 6. Request-Body erstellen                                  │
+      // │      const requestBody = { quizPercentages: percentages };         │
+      // │                                                                    │
+      // │      // 7. POST-Request senden                                     │
+      // │      try {                                                         │
+      // │        const response = await fetch('/calculate-quiz-bonus', {    │
+      // │          method: 'POST',                                           │
+      // │          headers: { 'Content-Type': 'application/json' },         │
+      // │          body: JSON.stringify(requestBody)                         │
+      // │        });                                                         │
+      // │                                                                    │
+      // │        // 8. Fehlerbehandlung                                      │
+      // │        if (!response.ok) {                                         │
+      // │          throw new Error('Server-Fehler beim Berechnen');          │
+      // │        }                                                           │
+      // │                                                                    │
+      // │        // 9. JSON-Response parsen                                  │
+      // │        const data = await response.json();                         │
+      // │                                                                    │
+      // │        // 10. Ergebnis anzeigen                                    │
+      // │        quizAverage.textContent =                                   │
+      // │          `Durchschnitt: ${data.averagePercentage.toFixed(1)}%`;   │
+      // │        quizBonus.textContent = `Bonuspunkte: ${data.bonusPoints}`; │
+      // │        quizInterpretation.textContent = data.interpretation;       │
+      // │        quizResultSection.classList.remove('hidden');               │
+      // │                                                                    │
+      // │      } catch (error) {                                             │
+      // │        alert('Fehler: ' + error.message);                          │
+      // │      }                                                             │
+      // │    });                                                             │
+      // │                                                                    │
+      // │ c) Event Listener für "Zurücksetzen"-Button:                       │
+      // │    quizClearBtn.addEventListener('click', () => {                  │
+      // │      quizInput.value = '';                                         │
+      // │      quizResultSection.classList.add('hidden');                    │
+      // │    });                                                             │
+      // │                                                                    │
+      // │ d) BONUS: Enter-Taste im Quiz-Input:                               │
+      // │    quizInput.addEventListener('keydown', (e) => {                  │
+      // │      if (e.key === 'Enter') {                                      │
+      // │        e.preventDefault();                                         │
+      // │        quizCalcBtn.click();                                        │
+      // │      }                                                             │
+      // │    });                                                             │
+      // │                                                                    │
+      // │ 📘 LEARNING GOALS:                                                 │
+      // │ ✓ Wiederverwendung des Fetch-API-Patterns                          │
+      // │ ✓ Validierung von Benutzereingaben (Anzahl, Datentyp)             │
+      // │ ✓ DOM-Manipulation mit mehreren Ergebnis-Sectionen                 │
+      // └────────────────────────────────────────────────────────────────────┘
+
+      // SCHREIBE HIER DEINEN QUIZ-BERECHNUNGS-CODE:
+
+
     </script>
   </body>
 </html>

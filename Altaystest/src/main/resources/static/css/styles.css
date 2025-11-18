@@ -158,3 +158,153 @@
         button { width: 100%; }
       }
 */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   AUFGABE 10: QUIZ-SECTION STYLING
+   ════════════════════════════════════════════════════════════════════════
+   
+   📘 KONTEXT (Übung 1: Web Basics - Trennung von Struktur und Darstellung):
+   Du hast im HTML eine zweite Section (<section class="quiz-section">)
+   hinzugefügt. Jetzt musst du sie visuell stylen.
+   
+   ANFORDERUNGEN:
+   Die Quiz-Section soll sich vom Noten-Bereich abheben, aber trotzdem
+   harmonisch wirken.
+   
+   SCHRITT 1: Grundstil für .quiz-section
+   ────────────────────────────────────────────────────────────────────
+   Erstelle eine CSS-Regel für .quiz-section mit folgenden Properties:
+   
+   - margin-top: 48px
+     → Großer Abstand zur Noten-Section oben
+   
+   - padding: 24px
+     → Innenabstand für Atmung
+   
+   - background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+     → Lila-blauer Farbverlauf als Hintergrund (anders als Noten-Section)
+     → Alternative: var(--accent) oder eine andere Farbe
+   
+   - border-radius: 12px
+     → Abgerundete Ecken
+   
+   - color: white
+     → Weißer Text (da dunkler Hintergrund)
+   
+   - box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3)
+     → Farbiger Schatten passend zum Verlauf
+   
+   BEISPIEL:
+   .quiz-section {
+     margin-top: 48px;
+     padding: 24px;
+     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+     border-radius: 12px;
+     color: white;
+     box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+   }
+   
+   SCHRITT 2: Überschrift in Quiz-Section
+   ────────────────────────────────────────────────────────────────────
+   Erstelle eine CSS-Regel für .quiz-section h2:
+   
+   - margin-top: 0
+     → Kein zusätzlicher Abstand oben (padding der Section reicht)
+   
+   - font-size: 1.5rem
+     → Große, prominente Überschrift
+   
+   - margin-bottom: 12px
+     → Abstand zum Text darunter
+   
+   SCHRITT 3: Lead-Text in Quiz-Section
+   ────────────────────────────────────────────────────────────────────
+   Erstelle eine CSS-Regel für .quiz-section .lead:
+   
+   - opacity: 0.9
+     → Leicht durchscheinend (subtil)
+   
+   - oder: color: rgba(255, 255, 255, 0.9)
+   
+   SCHRITT 4: Input-Felder und Buttons in Quiz-Section
+   ────────────────────────────────────────────────────────────────────
+   Da die Quiz-Section einen dunklen Hintergrund hat, müssen die
+   Formular-Elemente angepasst werden:
+   
+   a) Input-Feld:
+   .quiz-section input {
+     background: rgba(255, 255, 255, 0.95);
+     color: #0f172a;
+     border: 2px solid rgba(255, 255, 255, 0.3);
+   }
+   
+   b) Button (Primary):
+   .quiz-section button:not(.secondary) {
+     background: white;
+     color: #667eea;
+     border: none;
+   }
+   .quiz-section button:not(.secondary):hover {
+     background: rgba(255, 255, 255, 0.9);
+     transform: translateY(-1px);
+   }
+   
+   c) Secondary Button:
+   .quiz-section button.secondary {
+     background: transparent;
+     border: 2px solid white;
+     color: white;
+   }
+   .quiz-section button.secondary:hover {
+     background: rgba(255, 255, 255, 0.1);
+   }
+   
+   SCHRITT 5: Quiz-Result-Bereich
+   ────────────────────────────────────────────────────────────────────
+   Erstelle eine CSS-Regel für .quiz-section .result:
+   
+   - background: rgba(255, 255, 255, 0.15)
+     → Halbtransparenter weißer Hintergrund
+   
+   - backdrop-filter: blur(10px)
+     → Glasmorphism-Effekt (optional, moderne Browser)
+   
+   - border: 2px solid rgba(255, 255, 255, 0.3)
+     → Dezente Umrandung
+   
+   - padding: 20px
+   
+   - border-radius: 8px
+   
+   - margin-top: 20px
+   
+   SCHRITT 6: Result-Text-Elemente
+   ────────────────────────────────────────────────────────────────────
+   a) .result-bonus (Bonuspunkte hervorheben):
+   .quiz-section .result-bonus {
+     font-size: 1.8rem;
+     font-weight: bold;
+     color: #fbbf24;
+     margin: 8px 0;
+   }
+   
+   b) .result-interpretation:
+   .quiz-section .result-interpretation {
+     font-style: italic;
+     opacity: 0.9;
+   }
+   
+   ------------------------------------------------------------------------
+   📘 LEARNING GOALS:
+   ------------------------------------------------------------------------
+   ✓ Übung 1 (Web Basics): Trennung von Struktur (HTML) und Darstellung (CSS)
+   ✓ Fortgeschrittenes CSS: Gradients, Transparenz, Pseudo-Elemente
+   ✓ UX-Design: Visuelle Unterscheidung verschiedener Funktionsbereiche
+   ✓ Responsiveness: Anpassung an verschiedene Bildschirmgrößen
+   
+   ════════════════════════════════════════════════════════════════════════
+*/
+
+/* SCHREIBE HIER DEINE QUIZ-SECTION-STYLES: */
+
