@@ -61,6 +61,10 @@ public class GradeResponse {
 
     // SCHREIBE HIER DEINE FELDER (Zeile ca. 68):
 
+    private double average;
+    private int count;
+    private String interpretation;
+
 
 
 
@@ -79,6 +83,10 @@ public class GradeResponse {
     // └─────────────────────────────────────────────────────────────────────┘
 
     // SCHREIBE HIER DEINEN LEEREN KONSTRUKTOR (Zeile ca. 89):
+
+    public GradeResponse(){
+
+    }
 
 
     // ┌─────────────────────────────────────────────────────────────────────┐
@@ -102,6 +110,12 @@ public class GradeResponse {
     // └─────────────────────────────────────────────────────────────────────┘
 
     // SCHREIBE HIER DEINEN KONSTRUKTOR MIT PARAMETERN (Zeile ca. 116):
+
+    public GradeResponse(double average, int count, String interpretation){
+        this.average = average;
+        this.count = count;
+        this.interpretation = interpretation;
+    }
 
 
     // ┌─────────────────────────────────────────────────────────────────────┐
@@ -133,6 +147,18 @@ public class GradeResponse {
 
     // SCHREIBE HIER DEINE DREI GETTER (Zeile ca. 152):
 
+    public getAverage(){
+        return average;
+    }
+
+    public getCount(){
+        return count;
+    }
+
+    public getInterpretation(){
+        return interpretation;
+    }
+
 
 
 
@@ -160,6 +186,17 @@ public class GradeResponse {
 
     // SCHREIBE HIER DEINE DREI SETTER (Zeile ca. 185):
 
+    public void setAverage(double average){
+        this.average = average;
+    }
+
+    public void setCount(int count){
+        this.count = count;
+    }
+
+    public void setInterpretation(String interpretation){
+        this.interpretation = interpretation;
+    }
 
 
 
@@ -251,7 +288,71 @@ public class GradeResponse {
 
 // SCHREIBE HIER DEINE QuizResponse-KLASSE:
 
+public class QuizResponse(){
 
+
+
+private double averagePercentage;
+
+private double bonusPoints;
+
+private int count;
+
+private String interpretation;
+
+
+public QuizResponse(){
+
+}
+
+public QuizResponse(double averagePercentage, double bonusPoints, int count, String interpretation){
+    this.averagePercentage = averagePercentage;
+    this.bonusPoints = bonusPoints;
+    this.count = count;
+    this.interpretation = interpretation;
+}
+
+
+
+   public getAveragePercentage(){
+        return averagePercentage;
+    }
+
+    public getBonusPoints(){
+        return bonusPoints;
+    }
+
+
+    public getCount(){
+        return count;
+    }
+
+    public getInterpretation(){
+        return interpretation;
+    }
+
+
+
+
+
+ public void setAveragePercentage(double averagePercentage){
+        this.averagePercentage = averagePercentage;
+    }
+
+     public void setBonusPoints(double bonusPoints){
+        this.bonusPoints = bonusPoints;
+    }
+
+    public void setCount(int count){
+        this.count = count;
+    }
+
+    public void setInterpretation(String interpretation){
+        this.interpretation = interpretation;
+    }
+
+
+}
 /** ════════════════════════════════════════════════════════════════════════
  *  💡 LERNZIEL DIESER DATEI (Bezug zu Hausaufgaben):
  *  ════════════════════════════════════════════════════════════════════════

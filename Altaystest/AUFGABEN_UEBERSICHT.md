@@ -33,19 +33,19 @@ Diese Anleitung führt dich Schritt für Schritt durch die Implementierung eines
 #### Schritt 1: GradeRequest.java (4 Aufgaben)
 **Warum zuerst?** Der Controller braucht diese Klasse, um Daten zu empfangen.
 
-- [ ] Aufgabe 1: Feld `grades` (List<Double>)
-- [ ] Aufgabe 2: Leerer Konstruktor
-- [ ] Aufgabe 3: Getter `getGrades()`
-- [ ] Aufgabe 4: Setter `setGrades(List<Double>)`
+- [ x] Aufgabe 1: Feld `grades` (List<Double>)
+- [ x] Aufgabe 2: Leerer Konstruktor
+- [ x] Aufgabe 3: Getter `getGrades()`
+- [ x] Aufgabe 4: Setter `setGrades(List<Double>)`
 
 #### Schritt 2: GradeResponse.java (5 Aufgaben)
 **Warum jetzt?** Der Controller braucht diese Klasse, um Ergebnisse zurückzugeben.
 
-- [ ] Aufgabe 1: Felder (average, count, interpretation)
-- [ ] Aufgabe 2: Leerer Konstruktor
-- [ ] Aufgabe 3: Konstruktor mit Parametern
-- [ ] Aufgabe 4: Drei Getter
-- [ ] Aufgabe 5: Drei Setter
+- [ x] Aufgabe 1: Felder (average, count, interpretation)
+- [ x] Aufgabe 2: Leerer Konstruktor
+- [ x] Aufgabe 3: Konstruktor mit Parametern
+- [ x] Aufgabe 4: Drei Getter
+- [ x] Aufgabe 5: Drei Setter
 
 #### Schritt 3: AltaysController.java (7 Aufgaben)
 **Warum zuletzt (Backend)?** Hier kommt alles zusammen: DTOs werden genutzt, Logik wird implementiert.
@@ -60,11 +60,12 @@ Diese Anleitung führt dich Schritt für Schritt durch die Implementierung eines
 
 **✅ TEST:** Nach Schritt 3 kannst du das Backend testen:
 ```bash
-./Altaystest/mvnw -f ./Altaystest/pom.xml spring-boot:run
+cd Altaystest
+./mvnw spring-boot:run
 ```
-Dann mit curl testen:
+Dann mit curl testen (in neuem Terminal-Tab):
 ```bash
-curl -X POST http://localhost:8080/calculate-average \
+curl -X POST http://localhost:8080/grades/average \
   -H "Content-Type: application/json" \
   -d '{"grades": [1.0, 2.3, 1.7]}'
 ```
@@ -148,12 +149,29 @@ Erwartete Antwort: `{"average":1.67,"count":3,"interpretation":"Sehr gut"}`
 
 ## 🚀 Starten der Anwendung
 
-### Option 1: Mit Maven Wrapper
+### ⚠️ WICHTIG: Repository erst klonen!
+Wenn du das Projekt in VS Code als Remote-Repository geöffnet hast:
+1. Öffne Terminal in VS Code (`Strg+ö` oder `View → Terminal`)
+2. Klone das Repository lokal:
+   ```bash
+   cd ~/Desktop  # oder ein anderes Verzeichnis
+   git clone https://github.com/pollo60/WebAnw-Projekt.git
+   cd WebAnw-Projekt
+   ```
+3. Öffne den geklonten Ordner in VS Code: `File → Open Folder → WebAnw-Projekt`
+
+### Option 1: Mit Maven Wrapper (Terminal)
 ```bash
-./Altaystest/mvnw -f ./Altaystest/pom.xml spring-boot:run
+cd Altaystest
+./mvnw spring-boot:run
+```
+**Auf macOS/Linux:** Falls "Permission denied":
+```bash
+chmod +x mvnw
+./mvnw spring-boot:run
 ```
 
-### Option 2: Mit IDE (z. B. VS Code)
+### Option 2: Mit IDE (z. B. VS Code mit Java Extension Pack)
 1. Öffne `AltaystestApplication.java`
 2. Klicke auf "Run" über der `main`-Methode
 
