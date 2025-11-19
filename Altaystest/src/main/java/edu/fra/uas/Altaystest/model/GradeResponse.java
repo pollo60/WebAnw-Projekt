@@ -147,15 +147,15 @@ public class GradeResponse {
 
     // SCHREIBE HIER DEINE DREI GETTER (Zeile ca. 152):
 
-    public getAverage(){
+    public double getAverage() {
         return average;
     }
 
-    public getCount(){
+    public int getCount() {
         return count;
     }
 
-    public getInterpretation(){
+    public String getInterpretation() {
         return interpretation;
     }
 
@@ -186,15 +186,15 @@ public class GradeResponse {
 
     // SCHREIBE HIER DEINE DREI SETTER (Zeile ca. 185):
 
-    public void setAverage(double average){
+    public void setAverage(double average) {
         this.average = average;
     }
 
-    public void setCount(int count){
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public void setInterpretation(String interpretation){
+    public void setInterpretation(String interpretation) {
         this.interpretation = interpretation;
     }
 
@@ -288,20 +288,20 @@ public class GradeResponse {
 
 // SCHREIBE HIER DEINE QuizResponse-KLASSE:
 
-public class QuizResponse(){
+public class QuizResponse {
 
 
 
-private double averagePercentage;
+    private double averagePercentage;
 
-private double bonusPoints;
+    private double bonusPoints;
 
-private int count;
+    private int count;
 
-private String interpretation;
+    private String interpretation;
 
 
-public QuizResponse(){
+    public QuizResponse() {
 
 }
 
@@ -314,20 +314,20 @@ public QuizResponse(double averagePercentage, double bonusPoints, int count, Str
 
 
 
-   public getAveragePercentage(){
+    public double getAveragePercentage() {
         return averagePercentage;
     }
 
-    public getBonusPoints(){
+    public double getBonusPoints() {
         return bonusPoints;
     }
 
 
-    public getCount(){
+    public int getCount() {
         return count;
     }
 
-    public getInterpretation(){
+    public String getInterpretation() {
         return interpretation;
     }
 
@@ -335,19 +335,19 @@ public QuizResponse(double averagePercentage, double bonusPoints, int count, Str
 
 
 
- public void setAveragePercentage(double averagePercentage){
+    public void setAveragePercentage(double averagePercentage) {
         this.averagePercentage = averagePercentage;
     }
 
-     public void setBonusPoints(double bonusPoints){
+    public void setBonusPoints(double bonusPoints) {
         this.bonusPoints = bonusPoints;
     }
 
-    public void setCount(int count){
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public void setInterpretation(String interpretation){
+    public void setInterpretation(String interpretation) {
         this.interpretation = interpretation;
     }
 
